@@ -25,8 +25,8 @@ const hardhat = defineChain({
 });
 
 export const config = getDefaultConfig({
-  appName: "RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  appName: "Web3 lottery",
+  projectId: "f97ef9f99ca7af040c9dfe7e4eed7d26",
   chains: [
     mainnet,
     polygon,
