@@ -14,14 +14,11 @@ import { wagmiContractConfig } from "@/lib/contracts";
 import { formatEther } from "viem";
 import { useState, useEffect } from "react";
 import { usePublicClient } from "wagmi";
-import { useNotifications } from "@web3-onboard/react";
 
 export default function Home() {
   const { isConnected, address } = useAccount();
 
   const publicClient = usePublicClient();
-
-  const [, customNotification] = useNotifications();
 
   const [timeLeft, setTimeLeft] = useState({
     hours: 0,
@@ -76,21 +73,6 @@ export default function Home() {
     useWaitForTransactionReceipt({
       hash,
     });
-
-  const showNotification = (
-    type: "pending" | "success" | "error" | "hint",
-    message: string,
-    title?: string
-  ) => {
-    customNotification({
-      eventCode: `lottery-${type}`,
-      type,
-      message,
-      ...(title && { title }),
-      autoDismiss: 5000,
-      onClick: () => console.log("Notification clicked"),
-    });
-  };
 
   // useEffect(() => {
   //   if (isConfirmed && hash) {
@@ -149,7 +131,7 @@ export default function Home() {
           ...wagmiContractConfig,
           functionName: "getPlayer",
           args: [BigInt(i)],
-        })
+        }),
       );
 
       const playerAddresses = await Promise.all(playerPromises);
@@ -163,7 +145,7 @@ export default function Home() {
     if (!address || players.length === 0) return;
 
     const entered = players.some(
-      (p) => p.toLowerCase() === address.toLowerCase()
+      (p) => p.toLowerCase() === address.toLowerCase(),
     );
     setHasEntered(entered);
   }, [players, address]);
@@ -290,8 +272,8 @@ export default function Home() {
                           {isPending || isConfirming
                             ? "Entering..."
                             : hasEntered
-                            ? "Draw in Progress"
-                            : "Enter Raffle"}
+                              ? "Draw in Progress"
+                              : "Enter Raffle"}
                         </button>
                       </div>
                     </div>
