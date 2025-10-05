@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/provider-wrappers";
 import "@rainbow-me/rainbowkit/styles.css";
+import { Providers } from "@/components/provider/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Smart Contract Lottery",
-  description: "A decentralized smart contract lottery.",
+  title: "Web3 Raffle | Decentralized Lottery",
+  description:
+    "A provably fair, decentralized lottery powered by blockchain technology.",
 };
 
 export default function RootLayout({

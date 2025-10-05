@@ -1,12 +1,5 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import {
-  arbitrum,
-  base,
-  mainnet,
-  optimism,
-  polygon,
-  sepolia,
-} from "wagmi/chains";
+import { mainnet, sepolia } from "wagmi/chains";
 import { defineChain } from "viem";
 
 const hardhat = defineChain({
@@ -26,13 +19,9 @@ const hardhat = defineChain({
 
 export const config = getDefaultConfig({
   appName: "Web3 lottery",
-  projectId: "f97ef9f99ca7af040c9dfe7e4eed7d26",
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   chains: [
     mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    base,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true"
       ? [sepolia, hardhat]
       : [hardhat]),
